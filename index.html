@@ -13,7 +13,7 @@
       color: #222;
     }
     header {
-      background: linear-gradient(90deg, #00bfa5, #1de9b6);
+      background: linear-gradient(90deg, #00897B, #004D40);
       color: white;
       padding: 2rem;
       text-align: center;
@@ -24,6 +24,7 @@
       font-size: 2.5rem;
     }
     nav {
+      position: relative;
       display: flex;
       justify-content: center;
       gap: 1.5rem;
@@ -47,22 +48,74 @@
     nav a:hover, nav button:hover {
       background-color: #b2dfdb;
     }
+
+    /* قائمة اتصل بنا المنبثقة */
+    #contactPopup {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #e0f2f1;
+      border: 2px solid #00897B;
+      border-radius: 14px;
+      padding: 1.5rem 2rem;
+      width: 320px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      z-index: 1000;
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: #004d40;
+      text-align: center;
+    }
+    #contactPopup div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      gap: 10px;
+      direction: ltr;
+    }
+    #contactPopup div:last-child {
+      margin-bottom: 0;
+    }
+    #contactPopup svg {
+      width: 20px;
+      height: 20px;
+      fill: #00796b;
+      flex-shrink: 0;
+    }
+    #contactNote {
+      color: #26a69a;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      text-align: center;
+      direction: rtl;
+    }
+
     .search-bar {
       text-align: center;
       margin: 2rem;
     }
     .search-bar input {
       width: 60%;
+      max-width: 400px;
       padding: 0.7rem;
       font-size: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
+
+    /* تنسيق عرض الكتب كمربعات متوسطة */
     .container {
       padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 2rem;
+      gap: 1.8rem;
+      justify-items: center;
     }
     .book {
       background: white;
@@ -71,37 +124,44 @@
       padding: 1rem;
       transition: transform 0.3s ease;
       text-align: center;
+      width: 100%;
+      max-width: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .book:hover {
       transform: translateY(-5px);
     }
     .book img {
-      max-width: 100%;
-      height: 200px;
+      width: 100%;
+      height: 160px;
       object-fit: cover;
       border-radius: 8px;
     }
     .book h3 {
       margin: 1rem 0 0.5rem;
       color: #004d40;
+      font-size: 1.2rem;
     }
     .book p {
       color: #666;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      margin: 0 0 1rem 0;
     }
     .book a {
       display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #00bfa5;
+      padding: 0.5rem 1.2rem;
+      background-color: #00897B;
       color: white;
       text-decoration: none;
       border-radius: 8px;
       transition: background 0.3s;
     }
     .book a:hover {
-      background-color: #009688;
+      background-color: #004D40;
     }
+
     footer {
       text-align: center;
       padding: 1.5rem;
@@ -109,83 +169,40 @@
       font-size: 0.9rem;
       color: #555;
     }
-    /* نافذة نموذج الإضافة (Modal) */
-    .modal {
-      display: none;
+    footer a {
+      color: #e1306c;
+      text-decoration: none;
+      font-size: 1.2rem;
+      margin-right: 8px;
+    }
+
+    .dark-mode {
+      background-color: #121212 !important;
+      color: #e0e0e0 !important;
+    }
+    .dark-mode .book {
+      background-color: #1e1e1e !important;
+    }
+    .dark-mode input,
+    .dark-mode textarea {
+      background-color: #2e2e2e !important;
+      color: #e0e0e0 !important;
+      border-color: #555 !important;
+    }
+    .dark-mode a {
+      color: #80cbc4;
+    }
+    #darkModeBtn {
       position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.4);
-      padding-top: 50px;
-      box-sizing: border-box;
-    }
-    .modal-content {
-      background: white;
-      margin: auto;
-      border-radius: 12px;
-      padding: 20px 30px;
-      max-width: 600px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      position: relative;
-      font-family: 'Cairo', sans-serif;
-      direction: rtl;
-    }
-    .close-btn {
-      color: #aaa;
-      position: absolute;
-      top: 10px;
-      left: 15px;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-    .close-btn:hover {
-      color: #000;
-    }
-    .add-book-form h2 {
-      margin-top: 0;
-      color: #00796b;
-      text-align: center;
-    }
-    .add-book-form label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-      color: #004d40;
-    }
-    .add-book-form input[type="text"],
-    .add-book-form textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.3rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: 'Cairo', sans-serif;
-    }
-    .add-book-form textarea {
-      resize: vertical;
-      height: 80px;
-    }
-    .add-book-form button {
-      margin-top: 1.5rem;
-      background-color: #00bfa5;
+      bottom: 20px;
+      left: 20px;
+      background: #333;
+      color: #fff;
       border: none;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      font-size: 1.1rem;
       border-radius: 8px;
+      padding: 8px 14px;
       cursor: pointer;
-      width: 100%;
-      transition: background 0.3s;
-    }
-    .add-book-form button:hover {
-      background-color: #009688;
+      z-index: 999;
     }
   </style>
 </head>
@@ -195,50 +212,37 @@
   </header>
   <nav>
     <a href="#">الرئيسية</a>
-    <a href="#">كتب</a>
-    <a href="#">مشاريع التخرج</a>
-    <a href="#">بحوث</a>
-    <a href="#">اتصل بنا</a>
-    <button id="openAddBookBtn" title="إضافة كتاب جديد">إضافة كتاب</button>
+    <a href="#" id="contactBtn" aria-haspopup="true" aria-expanded="false">اتصل بنا ▼</a>
+
+    <div id="contactPopup" role="dialog" aria-modal="true" aria-labelledby="contactBtn">
+      <div>
+        <span>ali.razaq.hussein.md@gmail.com</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2l-8 5-8-5V6l8 5 8-5v.01z"/></svg>
+      </div>
+      <div>
+        <span>07804267805</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79a15.466 15.466 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.48 2.53.75 3.88.75a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.5 2.5 13.93 2.5 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.75 3.88a1 1 0 01-.21 1.11l-2.2 2.2z"/></svg>
+      </div>
+      <div id="contactNote">لطلب أي كتاب أو مصدر غير موجود تواصل عبر المعلومات التالية لغرض توفيره</div>
+    </div>
   </nav>
 
   <div class="search-bar">
     <input type="text" id="searchInput" placeholder="ابحث عن كتاب...">
   </div>
 
-  <div class="container" id="bookContainer">
-    <!-- الكتب ستُضاف هنا تلقائياً -->
-  </div>
+  <div class="container" id="bookContainer"></div>
 
-  <footer>
-    &copy; 2025 المكتبة الإلكترونية للكلية - جميع الحقوق محفوظة
+  <footer id="pageFooter">
+    &copy; 2025 المكتبة الإلكترونية للكلية - جميع الحقوق محفوظة<br>
+    developed by Eng Ali Al Waily
+    <a href="https://instagram.com/1j_it" target="_blank" rel="noopener">📷</a>
   </footer>
 
-  <!-- نموذج إضافة كتاب داخل نافذة منبثقة (Modal) -->
-  <div id="addBookModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeModalBtn">&times;</span>
-      <form class="add-book-form" id="addBookForm" onsubmit="return false;">
-        <h2>إضافة كتاب جديد</h2>
-        <label for="titleInput">اسم الكتاب</label>
-        <input type="text" id="titleInput" placeholder="ادخل اسم الكتاب" required>
-
-        <label for="descInput">وصف الكتاب</label>
-        <textarea id="descInput" placeholder="ادخل وصفًا موجزًا للكتاب" required></textarea>
-
-        <label for="imgInput">رابط صورة الغلاف</label>
-        <input type="text" id="imgInput" placeholder="https://example.com/image.jpg" required>
-
-        <label for="linkInput">رابط التحميل</label>
-        <input type="text" id="linkInput" placeholder="https://example.com/file.pdf" required>
-
-        <button id="addBookBtn">إضافة الكتاب</button>
-      </form>
-    </div>
-  </div>
+  <button id="darkModeBtn">🌓 الوضع الداكن</button>
 
   <script>
-    let books = [
+    let books = JSON.parse(localStorage.getItem('books')) || [
       {
         title: "مبادئ البرمجة",
         desc: "كتاب يشرح أساسيات البرمجة بلغة بايثون.",
@@ -262,12 +266,6 @@
         desc: "دراسة أكاديمية حول تقنيات الذكاء الاصطناعي.",
         img: "https://via.placeholder.com/250x200?text=الذكاء+الاصطناعي",
         link: "#"
-      },
-      {
-        title: "دراسات عليا",
-        desc: "عليا.",
-        img: "https://scontent.fnjf1-3.fna.fbcdn.net/v/t39.30808-1/516951879_122217489890132941_5113825375544856091_n.jpg",
-        link: "#"
       }
     ];
 
@@ -284,63 +282,47 @@
           </div>
         `;
       });
+      localStorage.setItem('books', JSON.stringify(books));
     }
 
-    // البحث
     document.getElementById('searchInput').addEventListener('input', function(e) {
       const query = e.target.value.toLowerCase();
       const filtered = books.filter(book => book.title.toLowerCase().includes(query));
       renderBooks(filtered);
     });
 
-    // فتح وإغلاق النافذة المنبثقة للنموذج
-    const modal = document.getElementById('addBookModal');
-    const openBtn = document.getElementById('openAddBookBtn');
-    const closeBtn = document.getElementById('closeModalBtn');
-
-    openBtn.onclick = () => {
-      modal.style.display = 'block';
-    };
-
-    closeBtn.onclick = () => {
-      modal.style.display = 'none';
-    };
-
-    window.onclick = event => {
-      if (event.target == modal) {
-        modal.style.display = 'none';
-      }
-    };
-
-    // إضافة كتاب مع التحقق من كلمة المرور
-    document.getElementById('addBookForm').addEventListener('submit', () => {
-      const password = prompt('يرجى إدخال كلمة المرور لإضافة كتاب جديد:');
-      const correctPassword = '12345'; // غيّرها لكلمة مرورك الخاصة
-
-      if (password !== correctPassword) {
-        alert('كلمة المرور غير صحيحة! لا يمكنك إضافة الكتاب.');
-        return;
-      }
-
-      const title = document.getElementById('titleInput').value.trim();
-      const desc = document.getElementById('descInput').value.trim();
-      const img = document.getElementById('imgInput').value.trim();
-      const link = document.getElementById('linkInput').value.trim();
-
-      if (!title || !desc || !img || !link) {
-        alert('يرجى ملء جميع الحقول!');
-        return;
-      }
-
-      books.push({ title, desc, img, link });
-      renderBooks(books);
-
-      // إعادة تعيين الحقول وإغلاق النافذة
-      document.getElementById('addBookForm').reset();
-      modal.style.display = 'none';
+    document.getElementById('darkModeBtn').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
     });
 
-    // عرض جميع الكتب عند بداية التشغيل
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+    }
+
+    // التحكم بفتح وغلق نافذة "اتصل بنا"
+    const contactBtn = document.getElementById('contactBtn');
+    const contactPopup = document.getElementById('contactPopup');
+
+    contactBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (contactPopup.style.display === 'block') {
+        contactPopup.style.display = 'none';
+        contactBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        contactPopup.style.display = 'block';
+        contactBtn.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!contactPopup.contains(e.target) && !contactBtn.contains(e.target)) {
+        contactPopup.style.display = 'none';
+        contactBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
     renderBooks(books);
   </script>
 </body>
