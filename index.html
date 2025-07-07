@@ -16,22 +16,41 @@
       background: linear-gradient(90deg, #00897B, #004D40);
       color: white;
       padding: 2rem;
-      text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    header > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
     header h1 {
       margin: 0;
       font-size: 2.5rem;
     }
+    header .header-info {
+      text-align: right;
+      line-height: 1.3;
+      min-width: 220px;
+    }
+    header .header-info div:first-child {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    header .header-info div:last-child {
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-top: 0.2rem;
+    }
     nav {
       position: relative;
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1.2rem;
       background-color: #e0f2f1;
       padding: 1rem;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      flex-wrap: wrap;
     }
     nav a, nav button {
       text-decoration: none;
@@ -48,8 +67,6 @@
     nav a:hover, nav button:hover {
       background-color: #b2dfdb;
     }
-
-    /* قائمة اتصل بنا المنبثقة */
     #contactPopup {
       display: none;
       position: absolute;
@@ -76,9 +93,6 @@
       gap: 10px;
       direction: ltr;
     }
-    #contactPopup div:last-child {
-      margin-bottom: 0;
-    }
     #contactPopup svg {
       width: 20px;
       height: 20px;
@@ -93,7 +107,6 @@
       text-align: center;
       direction: rtl;
     }
-
     .search-bar {
       text-align: center;
       margin: 2rem;
@@ -106,8 +119,6 @@
       border: 1px solid #ccc;
       border-radius: 8px;
     }
-
-    /* تنسيق عرض الكتب كمربعات متوسطة */
     .container {
       padding: 2rem;
       max-width: 900px;
@@ -129,9 +140,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-    .book:hover {
-      transform: translateY(-5px);
     }
     .book img {
       width: 100%;
@@ -161,7 +169,6 @@
     .book a:hover {
       background-color: #004D40;
     }
-
     footer {
       text-align: center;
       padding: 1.5rem;
@@ -175,22 +182,12 @@
       font-size: 1.2rem;
       margin-right: 8px;
     }
-
     .dark-mode {
       background-color: #121212 !important;
       color: #e0e0e0 !important;
     }
     .dark-mode .book {
       background-color: #1e1e1e !important;
-    }
-    .dark-mode input,
-    .dark-mode textarea {
-      background-color: #2e2e2e !important;
-      color: #e0e0e0 !important;
-      border-color: #555 !important;
-    }
-    .dark-mode a {
-      color: #80cbc4;
     }
     #darkModeBtn {
       position: fixed;
@@ -208,121 +205,77 @@
 </head>
 <body>
   <header>
-    <h1>المكتبة الإلكترونية للكلية</h1>
+    <div>
+      <h1>المكتبة الإلكترونية للكلية</h1>
+      <div class="header-info">
+        <div>وزارة التعليم العالي والبحث العلمي</div>
+        <div>جامعة الكوفة / كلية التخطيط العمراني</div>
+      </div>
+    </div>
   </header>
   <nav>
     <a href="#">الرئيسية</a>
-    <a href="#" id="contactBtn" aria-haspopup="true" aria-expanded="false">اتصل بنا ▼</a>
-
-    <div id="contactPopup" role="dialog" aria-modal="true" aria-labelledby="contactBtn">
-      <div>
-        <span>ali.razaq.hussein.md@gmail.com</span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2l-8 5-8-5V6l8 5 8-5v.01z"/></svg>
-      </div>
-      <div>
-        <span>07804267805</span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79a15.466 15.466 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.48 2.53.75 3.88.75a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.5 2.5 13.93 2.5 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.75 3.88a1 1 0 01-.21 1.11l-2.2 2.2z"/></svg>
-      </div>
+    <a href="#" onclick="filterBooks('all')">الكتب والمصادر</a>
+    <a href="#" onclick="filterBooks('مرحلة 1')">المرحلة الأولى</a>
+    <a href="#" onclick="filterBooks('مرحلة 2')">المرحلة الثانية</a>
+    <a href="#" onclick="filterBooks('مرحلة 3')">المرحلة الثالثة</a>
+    <a href="#" onclick="filterBooks('مرحلة 4')">المرحلة الرابعة</a>
+    <a href="#" id="contactBtn">اتصل بنا ▼</a>
+    <div id="contactPopup">
+      <div><span>ali.razaq.hussein.md@gmail.com</span> 📧</div>
+      <div><span>07804267805</span> 📞</div>
       <div id="contactNote">لطلب أي كتاب أو مصدر غير موجود تواصل عبر المعلومات التالية لغرض توفيره</div>
     </div>
   </nav>
-
   <div class="search-bar">
     <input type="text" id="searchInput" placeholder="ابحث عن كتاب...">
   </div>
-
   <div class="container" id="bookContainer"></div>
-
-  <footer id="pageFooter">
+  <footer>
     &copy; 2025 المكتبة الإلكترونية للكلية - جميع الحقوق محفوظة<br>
-    developed by Eng Ali Al Waily
-    <a href="https://instagram.com/1j_it" target="_blank" rel="noopener">📷</a>
+    developed by Eng Ali Al Waily <a href="https://instagram.com/1j_it" target="_blank">📷</a>
   </footer>
-
   <button id="darkModeBtn">🌓 الوضع الداكن</button>
-
   <script>
-    let books = JSON.parse(localStorage.getItem('books')) || [
-      {
-        title: "مبادئ البرمجة",
-        desc: "كتاب يشرح أساسيات البرمجة بلغة بايثون.",
-        img: "https://cdn.brandfetch.io/idfR5zZiYX/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1746096060114",
-        link: "#"
-      },
-      {
-        title: "هياكل البيانات",
-        desc: "شرح تفصيلي لهياكل البيانات والخوارزميات.",
-        img: "https://cdn.brandfetch.io/idfR5zZiYX/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1746096060114",
-        link: "#"
-      },
-      {
-        title: "مشروع التخرج - نظام إدارة",
-        desc: "مشروع تخرج شامل لتصميم نظام إدارة بيانات.",
-        img: "https://cdn.brandfetch.io/idfR5zZiYX/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1746096060114",
-        link: "#"
-      },
-      {
-        title: "بحث حول الذكاء الاصطناعي",
-        desc: "دراسة أكاديمية حول تقنيات الذكاء الاصطناعي.",
-        img: "https://via.placeholder.com/250x200?text=الذكاء+الاصطناعي",
-        link: "#"
-      }
+    let books = [
+      { title: "مبادئ البرمجة", desc: "كتاب يشرح أساسيات البرمجة بلغة بايثون.", img: "https://via.placeholder.com/250x200", link: "#", category: "مرحلة 1" },
+      { title: "هياكل البيانات", desc: "شرح تفصيلي لهياكل البيانات.", img: "https://via.placeholder.com/250x200", link: "#", category: "مرحلة 2" },
+      { title: "مشروع تخرج", desc: "نظام إدارة بيانات شامل.", img: "https://via.placeholder.com/250x200", link: "#", category: "مرحلة 4" },
+      { title: "الذكاء الاصطناعي", desc: "دراسة حول تقنيات الذكاء.", img: "https://via.placeholder.com/250x200", link: "#", category: "مرحلة 3" },
     ];
-
-    function renderBooks(filteredBooks) {
-      const container = document.getElementById('bookContainer');
-      container.innerHTML = '';
-      filteredBooks.forEach(book => {
-        container.innerHTML += `
-          <div class="book">
-            <img src="${book.img}" alt="${book.title}" />
-            <h3>${book.title}</h3>
-            <p>${book.desc}</p>
-            <a href="${book.link}" target="_blank" rel="noopener">تحميل</a>
-          </div>
-        `;
-      });
-      localStorage.setItem('books', JSON.stringify(books));
+    const container = document.getElementById('bookContainer');
+    function renderBooks(list) {
+      container.innerHTML = list.map(book => `
+        <div class="book">
+          <img src="${book.img}" alt="${book.title}" />
+          <h3>${book.title}</h3>
+          <p>${book.desc}</p>
+          <a href="${book.link}" target="_blank">تحميل</a>
+        </div>
+      `).join('');
     }
-
-    document.getElementById('searchInput').addEventListener('input', function(e) {
-      const query = e.target.value.toLowerCase();
-      const filtered = books.filter(book => book.title.toLowerCase().includes(query));
-      renderBooks(filtered);
+    function filterBooks(cat) {
+      if (cat === 'all') renderBooks(books);
+      else renderBooks(books.filter(b => b.category === cat));
+    }
+    document.getElementById('searchInput').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      renderBooks(books.filter(b => b.title.toLowerCase().includes(q)));
     });
-
+    document.getElementById('contactBtn').addEventListener('click', () => {
+      const popup = document.getElementById('contactPopup');
+      popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', (e) => {
+      const contactBtn = document.getElementById('contactBtn');
+      const popup = document.getElementById('contactPopup');
+      if (popup.style.display === 'block' && !popup.contains(e.target) && e.target !== contactBtn) {
+        popup.style.display = 'none';
+      }
+    });
     document.getElementById('darkModeBtn').addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
-      localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
     });
-
-    if (localStorage.getItem('dark-mode') === 'enabled') {
-      document.body.classList.add('dark-mode');
-    }
-
-    // التحكم بفتح وغلق نافذة "اتصل بنا"
-    const contactBtn = document.getElementById('contactBtn');
-    const contactPopup = document.getElementById('contactPopup');
-
-    contactBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (contactPopup.style.display === 'block') {
-        contactPopup.style.display = 'none';
-        contactBtn.setAttribute('aria-expanded', 'false');
-      } else {
-        contactPopup.style.display = 'block';
-        contactBtn.setAttribute('aria-expanded', 'true');
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!contactPopup.contains(e.target) && !contactBtn.contains(e.target)) {
-        contactPopup.style.display = 'none';
-        contactBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
-
     renderBooks(books);
   </script>
 </body>
